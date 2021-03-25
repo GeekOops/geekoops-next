@@ -3,9 +3,8 @@
 
 ## Software packages
 
-packages: ['dnsmasq']
+packages: ['dnsmasq', 'unzip']
 
 dnsmasq_service: "dnsmasq"
 
 tftp_root: "/srv/tftpboot"
-
