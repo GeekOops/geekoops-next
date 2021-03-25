@@ -1,0 +1,7 @@
+# Python cache
+__pycache__
+
+# File for creating NEXT template
+files/next
+files/next/*
+files/syslinux-*

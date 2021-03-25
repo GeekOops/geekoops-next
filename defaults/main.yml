@@ -1,0 +1,14 @@
+---
+# defaults file for geekoops-next
+
+dns_port: "0"
+dhcp_no_override: true
+dhcp_boot: "pxelinux.0"
+prompt: "geekoops-next Network boot"
+prompt_timeout: 2
+legacy: true
+efi: true
+dhcp_range: ""
+
+config_firewall: false
+firewall_zone: "public"

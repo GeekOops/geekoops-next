@@ -1,0 +1,31 @@
+################################################################################
+## Minimalistic dnsmasq setup for a NEXT server                               ##
+##   This file is maintained by the geekoops-next ansible role.               ##
+##   Don't manually edit it, as your changes will be overwritten!             ##
+################################################################################
+
+PORT={{dns_port}}
+{% if dhcp_no_override == true %}
+# Disable reuse of the DHCP servername to avoid confusion of old (and broken) clients
+dhcp-no-override
+{% endif %}
+
+# PXE boot menu
+dhcp-boot={{dhcp_boot}}
+pxe-prompt="{{prompt}}",{{prompt_timeout}}
+
+
+{% if legacy %}
+pxe-service=x86PC,     "Legacy Network Boot", pxelinux
+{% endif %}
+{% if efi %}
+pxe-service=x86-64_EFI,"EFI Network Boot",    pxelinux
+{% endif %}
+
+{% if dhcp_range != "" %}
+dhcp-range={{dhcp_range}}
+{% endif %}
+
+# tftp server
+enable-tftp
+tftp-root={{tftp_root}}

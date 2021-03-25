@@ -1,0 +1,8 @@
+---
+# openSUSE Leap 15.2 specific variables
+
+## Software packages
+
+packages: ['dnsmasq']
+
+tftp_root: "/srv/tftpboot"

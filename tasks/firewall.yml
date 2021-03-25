@@ -1,0 +1,29 @@
+---
+# Configure firewall
+
+- name: Ensure tftp is open in firewall
+  firewalld:
+    zone: "{{firewall_zone}}"
+    service: tftp
+    permanent: true
+    state: enabled
+  notify: reload firewalld
+  tags: ['firewall', 'tftp', 'dnsmasq']
+- name: Ensure dns is open in firewall
+  firewalld:
+    zone: "{{firewall_zone}}"
+    service: dns
+    permanent: true
+    state: enabled
+  notify: reload firewalld
+  when: dns_port != 0
+  tags: ['firewall', 'tftp', 'dnsmasq']
+- name: Ensure dhcp is open in firewall
+  firewalld:
+    zone: "{{firewall_zone}}"
+    service: dhcp
+    permanent: true
+    state: enabled
+  notify: reload firewalld
+  when: dhcp_range != ""
+  tags: ['firewall', 'tftp', 'dnsmasq']

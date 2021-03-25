@@ -1,0 +1,49 @@
+---
+# tasks file for geekoops-next
+
+# Distribution specific vars are ALWAYS needed, so don't forget the tags here
+- name: include distribution specific vars
+  include_vars: "{{ansible_distribution}}_{{ansible_distribution_version}}.yml"
+  tags: ['dnsmasq']
+
+- name: Ensure dnsmasq is installed
+  package:
+    name: "{{ packages }}"
+    state: present
+  tags: ['dnsmasq','tftp']
+- name: Configure dnsmasq
+  template:
+    src: dnsmasq.j2
+    dest: /etc/dnsmasq.conf
+    owner: root
+    group: root
+    mode: 0755
+- name: Ensure pxelinux.cfg is present
+  file:
+    path: "{{tftp_root}}/pxelinux.cfg"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  tags: ['dnsmasq','tftp']
+- name: Extract NEXT template
+  unarchive:
+    src: next.tar.bz2
+    dest: "{{tftp_root}}/"
+    owner: root
+    group: root
+    mode: 0755
+    keep_newer: yes
+  tags: ['dnsmasq','tftp']
+- name: Configure pxelinux.cfg default
+  template:
+    src: pxelinux_default.j2
+    dest: "{{tftp_root}}/pxelinux.cfg/default"
+    owner: root
+    group: root
+    mode: 0755
+  tags: ['dnsmasq','tftp']
+
+
+- include: firewall.yml
+  when: config_firewall == true

@@ -1,0 +1,16 @@
+#DEFAULT vesamenu.c32
+PROMPT 0
+TIMEOUT 100
+ONTIMEOUT local
+
+MENU TITLE {{prompt}}
+
+# Boot from local hard drive - This is the default
+LABEL local
+  MENU DEFAULT
+  MENU LABEL Boot local hard drive
+  LOCALBOOT 0
+
+MENU SEPARATOR
+
+## TODO: Add your own stuff here.
