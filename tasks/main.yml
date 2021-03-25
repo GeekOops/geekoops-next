@@ -10,7 +10,7 @@
   package:
     name: "{{ packages }}"
     state: present
-  tags: ['dnsmasq','tftp']
+  tags: ['dnsmasq', 'tftp']
 - name: Configure dnsmasq
   template:
     src: dnsmasq.j2
@@ -19,7 +19,7 @@
     group: root
     mode: 0755
   notify: restart dnsmasq
-  tags: ['dnsmasq','tftp']
+  tags: ['dnsmasq', 'tftp']
 - name: Ensure pxelinux.cfg is present
   file:
     path: "{{tftp_root}}/pxelinux.cfg"
@@ -27,16 +27,16 @@
     owner: root
     group: root
     mode: 0755
-  tags: ['dnsmasq','tftp']
+  tags: ['dnsmasq', 'tftp']
 - name: Extract NEXT template
   unarchive:
-    src: next.tar.bz2
+    src: next.zip
     dest: "{{tftp_root}}/"
     owner: root
     group: root
     mode: 0755
     keep_newer: yes
-  tags: ['dnsmasq','tftp']
+  tags: ['dnsmasq', 'tftp']
 - name: Configure pxelinux.cfg default
   template:
     src: pxelinux_default.j2
@@ -44,14 +44,15 @@
     owner: root
     group: root
     mode: 0755
-  tags: ['dnsmasq','tftp']
+    force: no
+  tags: ['dnsmasq', 'tftp']
 
 - name: Ensure dnsmasq is started and enabled
   systemd:
     name: "{{ dnsmasq_service }}"
     state: started
     enabled: true
-  tags: ['dnsmasq','tftp']
+  tags: ['dnsmasq', 'tftp']
 
 - include: firewall.yml
   when: config_firewall == true

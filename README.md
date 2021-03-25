@@ -1,3 +1,5 @@
+[![Test deployment](https://github.com/GeekOops/geekoops-next/actions/workflows/CI.yml/badge.svg)](https://github.com/GeekOops/geekoops-next/actions/workflows/CI.yml)
+
 # geekoops-next
 
 Install and configure a NEXT (Network Boot) server using `dnsmasq`.
