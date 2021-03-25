@@ -4,10 +4,15 @@
 ##   Don't manually edit it, as your changes will be overwritten!             ##
 ################################################################################
 
-PORT={{dns_port}}
+# DNS port (use 0 to disable DNS)
+port={{dns_port}}
+
 {% if dhcp_no_override == true %}
 # Disable reuse of the DHCP servername to avoid confusion of old (and broken) clients
 dhcp-no-override
+{% endif %}
+{% if dhcp_range != "" %}
+dhcp-range={{dhcp_range}}
 {% endif %}
 
 # PXE boot menu
@@ -22,9 +27,6 @@ pxe-service=x86PC,     "Legacy Network Boot", pxelinux
 pxe-service=x86-64_EFI,"EFI Network Boot",    pxelinux
 {% endif %}
 
-{% if dhcp_range != "" %}
-dhcp-range={{dhcp_range}}
-{% endif %}
 
 # tftp server
 enable-tftp

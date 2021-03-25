@@ -1,5 +1,10 @@
 ---
 # handlers file for geekoops-next
 
+- name: restart dnsmasq
+  systemd:
+    name: "{{dnsmasq_service}}"
+    state: restarted
+
 - name: reload firewalld
   shell: firewall-cmd --reload

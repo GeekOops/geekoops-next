@@ -17,7 +17,7 @@
     state: enabled
   notify: reload firewalld
   when: dns_port != 0
-  tags: ['firewall', 'tftp', 'dnsmasq']
+  tags: ['firewall', 'dns', 'dnsmasq']
 - name: Ensure dhcp is open in firewall
   firewalld:
     zone: "{{firewall_zone}}"
@@ -26,4 +26,13 @@
     state: enabled
   notify: reload firewalld
   when: dhcp_range != ""
-  tags: ['firewall', 'tftp', 'dnsmasq']
+  tags: ['firewall', 'dhcp', 'dnsmasq']
+- name: Ensure proxy-dhcp is open in firewall
+  firewalld:
+    zone: "{{firewall_zone}}"
+    service: proxy-dhcp
+    permanent: true
+    state: enabled
+  notify: reload firewalld
+  when: "'proxy' in dhcp_range"
+  tags: ['firewall', 'dhcp', 'dnsmasq']

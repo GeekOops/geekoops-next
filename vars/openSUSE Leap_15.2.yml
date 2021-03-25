@@ -5,4 +5,7 @@
 
 packages: ['dnsmasq']
 
+dnsmasq_service: "dnsmasq"
+
 tftp_root: "/srv/tftpboot"
+
