@@ -1,6 +1,8 @@
 ---
 galaxy_info:
   author: Felix Niederwanger
+  role_name: next
+  namespace: geekoops
   description: Configurable nginx setup role
   company: SUSE
   # issue_tracker_url: http://example.com/issue/tracker
@@ -16,7 +18,8 @@ galaxy_info:
   platforms:
     - name: opensuse
       versions:
-        - 15.2
+        - 15.3
+        - 15.4
 
   galaxy_tags: ['pxe', 'next', 'netboot']
 
